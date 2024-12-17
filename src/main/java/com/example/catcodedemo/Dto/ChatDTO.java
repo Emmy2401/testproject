@@ -1,9 +1,7 @@
 package com.example.catcodedemo.Dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-
 import java.util.Date;
-
 
 public class ChatDTO {
     private Long id;
