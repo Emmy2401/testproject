@@ -26,7 +26,6 @@ public class ChatTestIntegration {
         ChatDTO chatDTO = new ChatDTO();
         chatDTO.setNom("Miaou");
         chatDTO.setCouleur("Blanc");
-        chatDTO.setDateNaissance(new java.util.Date());
         chatDTO.setGenre(true);
 
         mockMvc.perform(post("/chats")
@@ -34,7 +33,8 @@ public class ChatTestIntegration {
                         .content(objectMapper.writeValueAsString(chatDTO)))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.nom").value("Miaou"))
-                .andExpect(jsonPath("$.couleur").value("Blanc"));
+                .andExpect(jsonPath("$.couleur").value("Blanc"))
+                .andExpect(jsonPath("$.genre").value(true));
     }
 
     @Test
@@ -44,12 +44,17 @@ public class ChatTestIntegration {
                 .andExpect(status().isOk());
     }
 
-//    @Test
-//    public void testGetChatById_NotFound() throws Exception {
-//        mockMvc.perform(get("/chats/999")
-//                        .contentType(MediaType.APPLICATION_JSON))
-//                .andExpect(status().isNotFound());
-//    }
+    // NB pour les tests : mettre un globalgestionhandler 
+    @Test
+    public void testGetChatById_NotFound() throws Exception {
+        // Configuration : nous savons que l'ID 999 n'existe pas
+
+        // Simulation de l'appel au point de terminaison
+        mockMvc.perform(get("/chats/999")
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isNotFound())
+                .andExpect(content().string("Le chat n'existe pas")); // Test que le message correspond à celui attendu
+    }
 
 
 }
