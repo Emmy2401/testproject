@@ -15,4 +15,16 @@ public class GlobalExceptionHandler {
         }
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erreur serveur");
     }
+    // Exemple de méthode qu'on peut ajouter utile pour + tard pour le vrai projet
+    /*@ExceptionHandler(IllegalArgumentException.class)
+public ResponseEntity<String> handleIllegalArgumentException(IllegalArgumentException ex) {
+    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Requête invalide : " + ex.getMessage());
+}
+
+@ExceptionHandler(Exception.class)
+public ResponseEntity<String> handleGenericException(Exception ex) {
+    return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erreur inattendue : " + ex.getMessage());
+}
+
+    * */
 }
