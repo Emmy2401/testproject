@@ -13,6 +13,7 @@ public class Chat {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    //    @Column(unique = true)  pour rentre le nom unique par exemple
     private String nom;
     private Date dateNaissance;
     private String couleur;
